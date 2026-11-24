@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GestiShop – Produits</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="entete">
+        <h1>GestiShop – Produits</h1>
+    </header>
+
+    <main>
+        <!-- ===== Formulaire (Create / Update) ===== -->
+        <section class="carte">
+            <h2 id="titre-formulaire">Nouveau produit</h2>
+            <form id="formulaire" novalidate>
+                <div class="grille">
+                    <div class="champ">
+                        <label for="nom">Nom du produit</label>
+                        <input type="text" id="nom" name="nom" placeholder="ex. Souris sans fil">
+                        <span class="erreur" data-erreur="nom"></span>
+                    </div>
+
+                    <div class="champ">
+                        <label for="categorie">Catégorie</label>
+                        <select id="categorie" name="categorie">
+                            <option value="">-- Choisir --</option>
+                            <option value="informatique">informatique</option>
+                            <option value="telephonie">telephonie</option>
+                            <option value="bureautique">bureautique</option>
+                        </select>
+                        <span class="erreur" data-erreur="categorie"></span>
+                    </div>
+
+                    <div class="champ">
+                        <label for="prix">Prix (FCFA)</label>
+                        <input type="number" id="prix" name="prix" min="1" step="1" placeholder="ex. 7500">
+                        <span class="erreur" data-erreur="prix"></span>
+                    </div>
+
+                    <div class="champ">
+                        <label for="stock">Quantité en stock</label>
+                        <input type="number" id="stock" name="stock" min="0" step="1" placeholder="ex. 45">
+                        <span class="erreur" data-erreur="stock"></span>
+                    </div>
+
+                    <div class="champ">
+                        <label for="note">Note (0 à 5)</label>
+                        <input type="number" id="note" name="note" min="0" max="5" step="0.1" placeholder="ex. 4.1">
+                        <span class="erreur" data-erreur="note"></span>
+                    </div>
+                </div>
+
+                <div class="boutons">
+                    <button type="submit" id="btn-valider" class="btn btn-principal">Ajouter</button>
+                    <button type="button" id="btn-annuler" class="btn btn-secondaire">Annuler</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- ===== Recherche + filtre ===== -->
+        <section class="carte">
+            <div class="outils">
+                <input type="search" id="recherche" placeholder="🔍 Rechercher un produit…"
+                    aria-label="Rechercher un produit">
+                <select id="filtre-categorie" aria-label="Filtrer par catégorie">
+                    <option value="">Toutes les catégories</option>
+                    <option value="informatique">informatique</option>
+                    <option value="telephonie">telephonie</option>
+                    <option value="bureautique">bureautique</option>
+                </select>
+                <div class="outils-droite">
+                    <button type="button" id="btn-export" class="btn btn-secondaire">Exporter le tableau</button>
+                    <button type="button" id="btn-reinitialiser" class="btn btn-danger">Réinitialiser</button>
+                </div>
+            </div>
+
+            <!-- ===== Tableau ===== -->
+            <div class="defilement">
+                <table id="tableau">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nom</th>
+                            <th>Catégorie</th>
+                            <th class="num triable" data-tri="prix">Prix <span class="fleche"></span></th>
+                            <th class="num">Quantité</th>
+                            <th class="num triable" data-tri="note">Note <span class="fleche"></span></th>
+                            <th class="num triable" data-tri="total">Total <span class="fleche"></span></th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="liste"></tbody>
+                </table>
+            </div>
+            <p id="message-vide" class="vide" hidden>Aucun produit</p>
+        </section>
+
+        <!-- ===== Statistiques ===== -->
+        <section class="stats" aria-label="Statistiques">
+            <div class="stat"><span class="stat-label">Nombre de produits</span><strong id="stat-nombre">0</strong>
+            </div>
+            <div class="stat"><span class="stat-label">Valeur totale du stock</span><strong id="stat-valeur">0
+                    FCFA</strong></div>
+            <div class="stat"><span class="stat-label">Produits en rupture</span><strong id="stat-rupture">0</strong>
+            </div>
+            <div class="stat"><span class="stat-label">Note moyenne</span><strong id="stat-note">0</strong></div>
+        </section>
+    </main>
+
+    <script type="module" src="app.js"></script>
+</body>
+
+</html>
